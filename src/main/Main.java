@@ -1,7 +1,7 @@
 package main;
 
 
-import application.MainScreen2;
+import application.MainScreen;
 import application.authentication.Inlogpage;
 import application.extraFeatures.Livechat2.Server;
 
@@ -15,7 +15,7 @@ public class Main {
 
 
     public static void main(String[] args) throws SQLException, FileNotFoundException {
-        MainScreen2 inlogpage = new MainScreen2();
+        MainScreen inlogpage = new MainScreen();
 
         try {
             new Server(12345).run();
@@ -23,7 +23,7 @@ public class Main {
             e.printStackTrace();
         }
         try {
-            MainScreen2 mainScreen2 =  new MainScreen2();
+            MainScreen mainScreen =  new MainScreen();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

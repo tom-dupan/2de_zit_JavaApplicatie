@@ -10,9 +10,10 @@ public class RateDAO extends BaseDAO {
 
     public void setrating() {
         try {
-            stmt = BaseDAO.getConnection().prepareStatement("INSERT INTO User (rating) VALUES (?) WHERE username = ?");
-            stmt.setString(1, String.valueOf(DataKlasse.getRating()));
-            stmt.setString(2,DataKlasse.getTutorName());
+            stmt = BaseDAO.getConnection().prepareStatement("INSERT INTO User (rating,description) VALUES (?,?) WHERE username = ?");
+            stmt.setInt(1, DataKlasse.getRating());
+            stmt.setString(2, DataKlasse.getDescription());
+            stmt.setString(3,DataKlasse.getTutorName());
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {

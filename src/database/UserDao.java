@@ -4,14 +4,12 @@ import application.MainScreen;
 import application.MainScreenAdmin;
 import application.authentication.Inlogpage;
 import application.authentication.Passwords;
-import application.authentication.Registerpage;
 import main.DataKlasse;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UserDao extends BaseDAO {
     String username = DataKlasse.getUserName();
@@ -151,6 +149,23 @@ public class UserDao extends BaseDAO {
         }
         return admin;
     }
+
+    public ArrayList getAllUsers() throws SQLException {
+        PreparedStatement stmt=BaseDAO.getConnection().prepareStatement("select * from User");
+        ResultSet rs=stmt.executeQuery();
+        ArrayList<String> userlijst = new ArrayList<String>();
+        while(rs.next()){
+                String username = rs.getString(2);
+                int rating = rs.getInt(4);
+                String description = rs.getString(5);
+                String element = "Username: "+username+'\n'+"Rating: "+rating+'\n'+"description: "+description;
+                userlijst.add(element);
+
+        }
+        return userlijst;
+    }
+
+
 }
 
 

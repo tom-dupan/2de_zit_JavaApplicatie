@@ -8,6 +8,7 @@ import com.sun.jdi.IntegerValue;
 import database.BaseDAO;
 import database.CourseDAO;
 import database.DatabaseSingleton;
+import database.UserDao;
 import main.DataKlasse;
 
 import javax.swing.*;
@@ -41,10 +42,13 @@ public class MainScreenAdmin<teller> extends JFrame {
     private final JButton exit = new JButton("Go back");
     private final JButton rating = new JButton("Rate");
     private final JButton inbox = new JButton("Inbox");
+    private final JButton allUsers = new JButton("Users");
 
     private JList course2 = new JList();
     private JList course = new JList();
+    private JList userlist = new JList();
     ArrayList lijstje = new ArrayList();
+
 
     byte[] byteArray;
 
@@ -109,6 +113,29 @@ public class MainScreenAdmin<teller> extends JFrame {
                 }
             }
         });
+     allUsers.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+             UserDao userDao = null;
+             try {
+                 userDao = new UserDao();
+                ArrayList arrayList = userDao.getAllUsers();
+                JDialog dialog = new JDialog();
+                frame.add(dialog);
+
+                 DefaultListModel listModel = new DefaultListModel();
+                 for (int i = 0; i < arrayList.size(); i++)
+                 {
+                     listModel.addElement(arrayList.get(i));
+                 }
+                 userlist.setModel(listModel);
+                 dialog.add(userlist);
+
+             } catch (SQLException | FileNotFoundException throwables) {
+                 throwables.printStackTrace();
+             }
+         }
+     });
         rating.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -6,12 +6,32 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public  class DataKlasse {
-    private static final JFrame frame = new JFrame();
-    private static int userID;
-    private static int CourseId;
 
+
+    //mainscreen
+    private static int CourseId;
+    private static final JFrame frame = new JFrame();
+
+
+
+    //authentication
+    private static int userID;
     private static String userName;
+    private static char[] password;
+    private static boolean admin;
+
+    //rating
+    private static int rating;
+    private static String description;
     private static String tutorName;
+
+    public static String getDescription() {
+        return description;
+    }
+
+    public static void setDescription(String description) {
+        DataKlasse.description = description;
+    }
 
     public static String getTutorName() {
         return tutorName;
@@ -20,12 +40,6 @@ public  class DataKlasse {
     public static void setTutorName(String tutorName) {
         DataKlasse.tutorName = tutorName;
     }
-
-    private static char[] password;
-    private static boolean admin;
-    private static int rating;
-
-
 
     public static int getRating() {
         return rating;

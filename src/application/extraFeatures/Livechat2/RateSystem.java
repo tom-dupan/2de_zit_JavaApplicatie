@@ -19,6 +19,7 @@ public class RateSystem {
     private JRadioButton a4RadioButton;
     private JTextField textField1;
     private JButton rateButton;
+    private JTextPane descriptionTextPane;
     int rating = 0;
     Connection connection = BaseDAO.getConnection();
 
@@ -71,6 +72,7 @@ public class RateSystem {
                     dialog.setVisible(true);
                 }
                 DataKlasse.setTutorName(textField1.getText());
+                DataKlasse.setDescription(descriptionTextPane.getText());
                 //insert rating into table
                 RateDAO rateDAO = new RateDAO();
                 rateDAO.setrating();

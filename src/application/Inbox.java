@@ -13,7 +13,7 @@ public class Inbox {
 
 
     DefaultListModel listModel;
-    JList list = new JList(listModel);
+    JList list1 = new JList(listModel);
     String content;
     private JButton clearAllButton;
     private JButton clearFirstButton;

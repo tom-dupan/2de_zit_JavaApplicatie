@@ -10,6 +10,15 @@ public  class DataKlasse {
 
     private static String userName;
     private static String password;
+    private static boolean admin;
+
+    public static boolean isAdmin() {
+        return admin;
+    }
+
+    public static void setAdmin(boolean admin) {
+        DataKlasse.admin = admin;
+    }
 
     public static String getPassword() {
         return password;

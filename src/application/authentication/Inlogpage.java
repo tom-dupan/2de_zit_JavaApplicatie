@@ -1,7 +1,8 @@
 package application.authentication;
 
 
-import application.MainScreen2;
+import application.MainScreen;
+import application.MainScreenAdmin;
 import database.BaseDAO;
 import main.Main;
 
@@ -22,6 +23,7 @@ public class Inlogpage extends JFrame {
 
         private final JFrame frame = new JFrame();
         private final JPanel container1 = new JPanel();
+        private final JPanel container2 = new JPanel();
         private final JLabel nameLabel = new JLabel("Name");
         private final JLabel passwordLabel = new JLabel("Password");
         private final JTextField nameInput = new JTextField();
@@ -31,7 +33,15 @@ public class Inlogpage extends JFrame {
         private final JButton registerbutton = new JButton("Register");
         
             Registerpage registerpage = new Registerpage();
-            MainScreen2 choose = new MainScreen2();
+            MainScreen choose;
+
+    {
+        try {
+            choose = new MainScreen();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public Inlogpage() throws SQLException {
@@ -77,7 +87,7 @@ public class Inlogpage extends JFrame {
                         }
 
                         encryptedpass = Passwords.hash(password.toCharArray() ,salt);
-                        String sqlStatement = "SELECT UserId, Username FROM User WHERE Username = ? AND Password = ?";
+                        String sqlStatement = "SELECT UserId, Username,IsAdmin  FROM User WHERE Username = ? AND Password = ?";
                         PreparedStatement stmt = conn.prepareStatement(sqlStatement,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                         stmt.setString(1,username);
                         stmt.setBytes(2,encryptedpass);
@@ -90,20 +100,31 @@ public class Inlogpage extends JFrame {
                             //Iterate through resultset to find a user
                             int logedInUserId = 0;
                             String logedInUserName="";
+                            int logedInIsAdmin = 0;
+                            boolean admin = false;
                             rs.beforeFirst();
                             while (rs.next()) {
                                 logedInUserId = Integer.parseInt(rs.getString(1));
                                 logedInUserName = rs.getString(2);
+                                logedInIsAdmin = rs.getInt(3);
                             }
                             rs.close();
                             stmt.close();
-
                             main.DataKlasse.setUserID(logedInUserId);
                             main.DataKlasse.setUserName(logedInUserName);
+                            main.DataKlasse.setAdmin(admin);
 
-                            MainScreen2 choose = new MainScreen2();
-                            Inlogpage.this.remove(container1);
-                            Inlogpage.this.addToframe(choose);
+                            isAdmin(logedInIsAdmin);
+                            if (admin ==true){
+                                MainScreen choose = new MainScreen();
+                                Inlogpage.this.remove(container1);
+                                Inlogpage.this.addToframe(choose);
+                            }
+                            else {
+                                MainScreenAdmin chooseAdmin = new MainScreenAdmin();
+                                Inlogpage.this.remove(container1);
+                                Inlogpage.this.addToframe(chooseAdmin);
+                            }
                         }
 
                     } catch (SQLException | FileNotFoundException throwables) {
@@ -125,8 +146,7 @@ public class Inlogpage extends JFrame {
             });
         }
 
-    private void addToframe(MainScreen2 choose) {
-    }
+
 
     public JButton getInlogButton(){
             return inlogbutton;
@@ -138,7 +158,16 @@ public class Inlogpage extends JFrame {
             return passwordInput;
         }
 
-
+        private boolean isAdmin(int logedInIsAdmin){
+            boolean admin = false;
+            if (logedInIsAdmin==0){
+                admin = false;
+            }
+            else if (logedInIsAdmin==1){
+                admin = true;
+            }
+            return admin;
+        }
 
         public void setLayoutM() {
             container1.setLayout(null);
@@ -163,7 +192,14 @@ public class Inlogpage extends JFrame {
             container1.add(passwordInput);
             container1.add(showPassword);
         }
-        public Container getContainer(){
+    public void addToframe(MainScreen mainScreen) {
+
+    }
+    private void addToframe(MainScreenAdmin chooseAdmin) {
+    }
+
+
+    public Container getContainer(){
             return container1;
         }
         public JFrame getFrame(){return frame;}

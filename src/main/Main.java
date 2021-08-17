@@ -7,13 +7,14 @@ import application.extraFeatures.Livechat2.Server;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main {
 
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, FileNotFoundException {
         MainScreen2 inlogpage = new MainScreen2();
 
         try {

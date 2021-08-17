@@ -4,6 +4,7 @@ package application.authentication;
 import application.MainScreen;
 import application.MainScreenAdmin;
 import database.BaseDAO;
+import database.UserDao;
 import main.DataKlasse;
 import main.Main;
 
@@ -68,69 +69,17 @@ public class Inlogpage extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     //select from database
-
-                    String username = nameInput.getText();
-                    String password = passwordInput.getText();
-
-                    byte[] salt = null;
-                    byte[] encryptedpass = null;
-
-
+                    UserDao userDao = null;
                     try {
-                        conn = baseDao.getConnection();
-                        String saltStatement = "SELECT Salt FROM User WHERE Username = ?";
-                        PreparedStatement saltstmt = conn.prepareStatement(saltStatement,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                        saltstmt.setString(1, username);
-                        ResultSet saltrs = saltstmt.executeQuery();
-
-                        while (saltrs.next()){
-                            salt = saltrs.getBytes(1);
-                        }
-
-                        encryptedpass = Passwords.hash(password.toCharArray() ,salt);
-                        String sqlStatement = "SELECT UserId, Username,IsAdmin  FROM User WHERE Username = ? AND Password = ?";
-                        PreparedStatement stmt = conn.prepareStatement(sqlStatement,ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                        stmt.setString(1,username);
-                        stmt.setBytes(2,encryptedpass);
-                        ResultSet rs = stmt.executeQuery();
-
-                        //If resultset has no next, then specific combination of username and password does not exist in database
-                        if (!rs.next())
-                            JOptionPane.showMessageDialog(frame, "User not found or combination does not coincide. Please try again.");
-                        else {
-                            //Iterate through resultset to find a user
-                            int logedInUserId = 0;
-                            String logedInUserName="";
-                            int logedInIsAdmin = 0;
-                            boolean admin = false;
-                            rs.beforeFirst();
-                            while (rs.next()) {
-                                logedInUserId = Integer.parseInt(rs.getString(1));
-                                logedInUserName = rs.getString(2);
-                                logedInIsAdmin = rs.getInt(3);
-                            }
-                            rs.close();
-                            stmt.close();
-                            main.DataKlasse.setUserID(logedInUserId);
-                            main.DataKlasse.setUserName(logedInUserName);
-                            main.DataKlasse.setAdmin(admin);
-
-                            isAdmin(logedInIsAdmin);
-                            if (admin ==true){
-                                MainScreen choose = new MainScreen();
-                                Inlogpage.this.remove(container2);
-                                Inlogpage.this.addToframe(choose);
-                            }
-                            else {
-                                MainScreenAdmin chooseAdmin = new MainScreenAdmin();
-                                Inlogpage.this.remove(container2);
-                                Inlogpage.this.addToframe(chooseAdmin);
-                            }
-                        }
-
-                    } catch (SQLException | FileNotFoundException throwables) {
+                        userDao = new UserDao();
+                    } catch (FileNotFoundException fileNotFoundException) {
+                        fileNotFoundException.printStackTrace();
+                    } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
+                    userDao.loginUser();
+
+                   
                 }
             });
             showPassword.addActionListener(new ActionListener() {

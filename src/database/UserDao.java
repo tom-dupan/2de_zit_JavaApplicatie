@@ -74,7 +74,7 @@ public class UserDao extends BaseDAO {
         //Go back to login page
     }
 
-    public void loginUser(Inlogpage inlogpage) {
+    public void loginUser() {
 
         //select from database
 

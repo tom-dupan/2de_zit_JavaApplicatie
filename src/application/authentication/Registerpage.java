@@ -1,6 +1,7 @@
 package application.authentication;
 
 import database.BaseDAO;
+import database.UserDao;
 import main.DataKlasse;
 
 import javax.swing.*;
@@ -8,29 +9,31 @@ import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.sql.*;
 
 public class Registerpage extends JFrame{
 
-        //Database reference
+
+    //Database reference
         private BaseDAO baseDao = new BaseDAO() {};
         private Connection conn;
 
 
         //View elements
         private final JFrame frame = new JFrame();
+    private final JLabel nameLabel = new JLabel("Name");
+    private final JLabel passwordLabel = new JLabel("Password");
         private final Container container1 = getContentPane();
-        private final JLabel nameLabel = new JLabel("Name");
-        private final JLabel passwordLabel = new JLabel("Password");
         private final JTextField nameInput = new JTextField();
         private final JPasswordField passwordInput = new JPasswordField();
         private final JCheckBox showPassword = new JCheckBox("show Password");
         private final JButton registerbutton = new JButton("register");
-
+        Inlogpage inlogpage;
         //String elements
         private String username;
         private String password ;
-        private int userid=0;
+
 
 
         public Registerpage() {
@@ -39,17 +42,27 @@ public class Registerpage extends JFrame{
             setLayoutM();
             setFrameSizeAndLocation();
             addToframe();
+            DataKlasse.setFrame(this.frame);
 
-            main.DataKlasse.getFrame().setContentPane(container1);
             main.DataKlasse.getFrame().setVisible(true);
 
             registerbutton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    DataKlasse.setUserName(username);
-                    DataKlasse.setPassword(password);
-                    registerUser();
+                    DataKlasse.setUserName(nameInput.getText());
+                    DataKlasse.setPassword(passwordInput.getPassword());
+                    UserDao userDao = null;
+                    try {
+                        userDao = new UserDao();
+                    } catch (FileNotFoundException fileNotFoundException) {
+                        fileNotFoundException.printStackTrace();
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    userDao.registerUser();
+                    Registerpage.this.dispose();
+                    Registerpage.this.add(inlogpage);
 
                 }
             });
@@ -66,63 +79,6 @@ public class Registerpage extends JFrame{
                 }
             });
         }
-
-        public void registerUser(){
-            //insert to database
-            username = nameInput.getText();
-            password = passwordInput.getText();
-            byte[] salt = Passwords.getNextSalt();
-
-            if (password.length() < 8) {
-                JOptionPane.showMessageDialog(frame, "Password must be at least 8 characters long");
-            } else {
-                byte[] encryptedpassword = null;
-
-                //Salt encrypted password
-                encryptedpassword = Passwords.hash(password.toCharArray(), salt);
-
-                //Make a ReviewPerDay instance
-
-
-                try {
-                    conn = baseDao.getConnection();
-                    String command = "INSERT INTO User( Username, Password, Salt, OwnedDeck)Values(?,?,?,?)";
-                    PreparedStatement stmt = conn.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
-                    stmt.setString(1,username);
-                    stmt.setBytes(2, encryptedpassword);
-                    stmt.setBytes(3, salt);
-                    stmt.setInt(4, 0);
-                    int affectedrows = stmt.executeUpdate();
-                    if (affectedrows == 0) {
-                        throw new SQLException("Creating user failed, no rows affected.");
-                    }
-                    else{
-                        try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
-                            if (generatedKeys.next()) {
-                                //https://stackoverflow.com/questions/1915166/how-to-get-the-insert-id-in-jdbc
-                                //user.setId(generatedKeys.getLong(1));
-                                userid = generatedKeys.getInt(1);
-                            }
-                            else {throw new SQLException("Creating user failed, no ID obtained."); }
-                        }
-                    }
-                    conn.commit();
-                    stmt.close();
-
-
-                } catch (SQLException  throwables) {
-                    //Give this dialog is username already exists
-                    if (throwables.getErrorCode() == 1062)
-                        JOptionPane.showMessageDialog(frame, "This username already exists! Please chose another one.");
-                    throwables.printStackTrace();
-                }
-            }
-            //Go back to login page
-
-            Registerpage.this.dispose();
-        }
-
-
 
         public JButton getRegisterbuttonButton() { return registerbutton; }
         public JTextField getNamelabel() { return nameInput; }

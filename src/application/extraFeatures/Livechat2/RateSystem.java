@@ -1,6 +1,8 @@
 package application.extraFeatures.Livechat2;
 
 import database.BaseDAO;
+import database.RateDAO;
+import main.DataKlasse;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -27,40 +29,35 @@ public class RateSystem {
 
     public RateSystem() throws SQLException {
 
-        //insert rating into table
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO User (rating) VALUES (?)");
-        stmt.setInt(1, rating);
-        stmt.executeUpdate();
-        stmt.close();
 
         a1RadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                rating = 1;
+                DataKlasse.setRating(1);
             }
         });
         a2RadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                rating = 2;
+                DataKlasse.setRating(2);
             }
         });
         a3RadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                rating = 3;
+                DataKlasse.setRating(3);
             }
         });
         a4RadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                rating = 4;
+                DataKlasse.setRating(4);
             }
         });
         a5RadioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                rating = 5;
+                DataKlasse.setRating(5);
             }
         });
 
@@ -73,18 +70,10 @@ public class RateSystem {
                     dialog.add(label);
                     dialog.setVisible(true);
                 }
-                String naam = textField1.getText();
-
+                DataKlasse.setTutorName(textField1.getText());
                 //insert rating into table
-                PreparedStatement stmt = null;
-                try {
-                    stmt = connection.prepareStatement("INSERT INTO User (TutorNaam) VALUES (?)");
-                    stmt.setString(1, naam);
-                    stmt.executeUpdate();
-                    stmt.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
+                RateDAO rateDAO = new RateDAO();
+                rateDAO.setrating();
             }
         });
     }

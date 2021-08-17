@@ -1,5 +1,7 @@
 package main;
 
+import application.authentication.Inlogpage;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -9,8 +11,29 @@ public  class DataKlasse {
     private static int CourseId;
 
     private static String userName;
-    private static String password;
+    private static String tutorName;
+
+    public static String getTutorName() {
+        return tutorName;
+    }
+
+    public static void setTutorName(String tutorName) {
+        DataKlasse.tutorName = tutorName;
+    }
+
+    private static char[] password;
     private static boolean admin;
+    private static int rating;
+
+
+
+    public static int getRating() {
+        return rating;
+    }
+
+    public static void setRating(int rating) {
+        DataKlasse.rating = rating;
+    }
 
     public static boolean isAdmin() {
         return admin;
@@ -20,11 +43,11 @@ public  class DataKlasse {
         DataKlasse.admin = admin;
     }
 
-    public static String getPassword() {
+    public static char[] getPassword() {
         return password;
     }
 
-    public static void setPassword(String password) {
+    public static void setPassword(char[] password) {
         DataKlasse.password = password;
     }
 
@@ -52,8 +75,8 @@ public  class DataKlasse {
         return frame;
     }
 
-    public static void setFrame() {
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    public static void setFrame(JFrame frame) {
+        DataKlasse.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     public static int getUserID() {
@@ -85,5 +108,8 @@ public  class DataKlasse {
 
     public static String getCourseName() {
         return CourseName;
+    }
+
+    public static void setClassname(Class<? extends Inlogpage> aClass) {
     }
 }

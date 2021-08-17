@@ -4,6 +4,7 @@ package application.authentication;
 import application.MainScreen;
 import application.MainScreenAdmin;
 import database.BaseDAO;
+import main.DataKlasse;
 import main.Main;
 
 import javax.swing.*;
@@ -22,8 +23,7 @@ public class Inlogpage extends JFrame {
         private Connection conn;
 
         private final JFrame frame = new JFrame();
-        private final JPanel container1 = new JPanel();
-        private final JPanel container2 = new JPanel();
+        private static final JPanel container2 = new JPanel();
         private final JLabel nameLabel = new JLabel("Name");
         private final JLabel passwordLabel = new JLabel("Password");
         private final JTextField nameInput = new JTextField();
@@ -46,11 +46,12 @@ public class Inlogpage extends JFrame {
 
     public Inlogpage() throws SQLException {
 
+        DataKlasse.setClassname(this.getClass());
             setLayoutM();
             setFrameSizeAndLocation();
 
 
-            main.DataKlasse.getFrame().setContentPane(container1);
+            main.DataKlasse.getFrame().setContentPane(container2);
             main.DataKlasse.getFrame().setVisible(true);
 
             registerbutton.addActionListener(new ActionListener() {
@@ -58,7 +59,7 @@ public class Inlogpage extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     Registerpage registerFrame = new Registerpage();
                     addToframe(registerpage);
-                    Inlogpage.this.remove(container1);
+                    Inlogpage.this.remove(container2);
                     Inlogpage.this.addToframe(registerFrame);
                 }
             });
@@ -117,12 +118,12 @@ public class Inlogpage extends JFrame {
                             isAdmin(logedInIsAdmin);
                             if (admin ==true){
                                 MainScreen choose = new MainScreen();
-                                Inlogpage.this.remove(container1);
+                                Inlogpage.this.remove(container2);
                                 Inlogpage.this.addToframe(choose);
                             }
                             else {
                                 MainScreenAdmin chooseAdmin = new MainScreenAdmin();
-                                Inlogpage.this.remove(container1);
+                                Inlogpage.this.remove(container2);
                                 Inlogpage.this.addToframe(chooseAdmin);
                             }
                         }
@@ -170,7 +171,7 @@ public class Inlogpage extends JFrame {
         }
 
         public void setLayoutM() {
-            container1.setLayout(null);
+            container2.setLayout(null);
         }
 
         public void setFrameSizeAndLocation() {
@@ -184,13 +185,13 @@ public class Inlogpage extends JFrame {
         }
 
         public void addToframe(Registerpage registerpage) {
-            container1.add(nameLabel);
-            container1.add(passwordLabel);
-            container1.add(nameInput);
-            container1.add(inlogbutton);
-            container1.add(registerbutton);
-            container1.add(passwordInput);
-            container1.add(showPassword);
+            container2.add(nameLabel);
+            container2.add(passwordLabel);
+            container2.add(nameInput);
+            container2.add(inlogbutton);
+            container2.add(registerbutton);
+            container2.add(passwordInput);
+            container2.add(showPassword);
         }
     public void addToframe(MainScreen mainScreen) {
 
@@ -200,7 +201,7 @@ public class Inlogpage extends JFrame {
 
 
     public Container getContainer(){
-            return container1;
+            return container2;
         }
         public JFrame getFrame(){return frame;}
     }

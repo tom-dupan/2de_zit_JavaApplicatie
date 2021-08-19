@@ -10,7 +10,7 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Client {
-
+// een client chat in de terminal.
     private String host;
     private int port;
 

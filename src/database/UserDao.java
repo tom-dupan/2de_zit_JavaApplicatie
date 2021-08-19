@@ -2,7 +2,7 @@ package database;
 
 import application.MainScreen;
 import application.MainScreenAdmin;
-import application.authentication.Inlogpage;
+import application.authentication.Inlogpage2;
 import application.authentication.Passwords;
 import main.DataKlasse;
 
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class UserDao extends BaseDAO {
     String username = DataKlasse.getUserName();
     String password = String.valueOf(DataKlasse.getPassword());
-    Inlogpage inlogpage = new Inlogpage();
+    Inlogpage2 inlogpage = new Inlogpage2();
     private int userid = 0;
 
     public UserDao() throws FileNotFoundException, SQLException {
@@ -124,14 +124,14 @@ public class UserDao extends BaseDAO {
                     MainScreen choose = new MainScreen();
                     DataKlasse.getFrame().dispose();
                     DataKlasse.setFrame(choose);
-                     inlogpage = (Inlogpage) new Inlogpage().add(choose);
+                     inlogpage = (Inlogpage2) new Inlogpage2().add(choose);
 
                 } else {
                     MainScreenAdmin chooseAdmin = new MainScreenAdmin();
                     DataKlasse.getFrame().dispose();
                     DataKlasse.setFrame(chooseAdmin);
 
-                     inlogpage = (Inlogpage) new Inlogpage().add(chooseAdmin);
+                     inlogpage = (Inlogpage2) new Inlogpage2().add(chooseAdmin);
                 }
             }
 

@@ -1,25 +1,19 @@
 package application;
 
-import application.authentication.Inlogpage;
-import application.authentication.Registerpage;
 import database.BaseDAO;
 
-import database.BaseDAO;
 import database.CourseDAO;
-import database.DatabaseSingleton;
 import main.DataKlasse;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-    public class MyCourses extends JFrame {
+public class MyCourses extends JFrame {
 
         CourseDAO dao = new CourseDAO();
         //JDBC part

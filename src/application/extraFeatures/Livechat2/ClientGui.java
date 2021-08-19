@@ -44,7 +44,6 @@ public class ClientGui extends Thread{
         jfr.setResizable(false);
         jfr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Module du fil de discussion
         jtextFilDiscu.setBounds(25, 25, 490, 320);
         jtextFilDiscu.setFont(font);
         jtextFilDiscu.setMargin(new Insets(6, 6, 6, 6));
@@ -55,7 +54,6 @@ public class ClientGui extends Thread{
         jtextFilDiscu.setContentType("text/html");
         jtextFilDiscu.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, true);
 
-        // Module de la liste des utilisateurs
         jtextListUsers.setBounds(520, 25, 156, 320);
         jtextListUsers.setEditable(true);
         jtextListUsers.setFont(font);
@@ -67,7 +65,6 @@ public class ClientGui extends Thread{
         jtextListUsers.setContentType("text/html");
         jtextListUsers.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, true);
 
-        // Field message user input
         jtextInputChat.setBounds(0, 350, 400, 50);
         jtextInputChat.setFont(font);
         jtextInputChat.setMargin(new Insets(6, 6, 6, 6));
@@ -124,18 +121,15 @@ public class ClientGui extends Thread{
         jtfport.getDocument().addDocumentListener(new TextListener(jtfName, jtfport, jtfAddr, jcbtn));
         jtfAddr.getDocument().addDocumentListener(new TextListener(jtfName, jtfport, jtfAddr, jcbtn));
 
-        // position des Modules
         jcbtn.setFont(font);
         jtfAddr.setBounds(25, 380, 135, 40);
         jtfName.setBounds(375, 380, 135, 40);
         jtfport.setBounds(200, 380, 135, 40);
         jcbtn.setBounds(575, 380, 100, 40);
 
-        // couleur par defaut des Modules fil de discussion et liste des utilisateurs
         jtextFilDiscu.setBackground(Color.LIGHT_GRAY);
         jtextListUsers.setBackground(Color.LIGHT_GRAY);
 
-        // ajout des éléments
         jfr.add(jcbtn);
         jfr.add(jtextFilDiscuSP);
         jfr.add(jsplistuser);
@@ -145,7 +139,6 @@ public class ClientGui extends Thread{
         jfr.setVisible(true);
 
 
-        // info sur le Chat
         appendToPane(jtextFilDiscu, "<h4>The commands of the chat are:</h4>"
                 +"<ul>"
                 +"<li><b>@nickname</b> To send a private message to the user of the nickname'</li>"
@@ -154,7 +147,6 @@ public class ClientGui extends Thread{
                 +"<li><b>arrow up</b> to get your last written message</li>"
                 +"</ul><br/>");
 
-        // On connect
         jcbtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
                 try {
@@ -197,7 +189,6 @@ public class ClientGui extends Thread{
 
         });
 
-        // on deco
         jsbtndeco.addActionListener(new ActionListener()  {
             public void actionPerformed(ActionEvent ae) {
                 jfr.add(jtfName);
@@ -258,8 +249,6 @@ public class ClientGui extends Thread{
         }
 
     }
-
-    // envoi des messages
     public void sendMessage() {
         try {
             String message = jtextInputChat.getText().trim();

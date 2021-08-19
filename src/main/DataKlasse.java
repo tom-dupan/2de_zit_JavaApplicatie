@@ -1,7 +1,5 @@
 package main;
 
-import application.authentication.Inlogpage;
-
 import javax.swing.*;
 import java.util.ArrayList;
 

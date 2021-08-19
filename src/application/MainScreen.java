@@ -1,26 +1,20 @@
 package application;
 
-import application.authentication.Inlogpage;
 import application.extraFeatures.Livechat2.Calendar;
 import application.extraFeatures.Livechat2.ClientGui;
 import application.extraFeatures.Livechat2.RateSystem;
-import com.sun.jdi.IntegerValue;
 import database.BaseDAO;
 import database.CourseDAO;
-import database.DatabaseSingleton;
 import main.DataKlasse;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

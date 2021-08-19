@@ -2,11 +2,10 @@ package main;
 
 
 import application.MainScreen;
-import application.authentication.Inlogpage;
+
+import application.authentication.Registerpage2;
 import application.extraFeatures.Livechat2.Server;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,7 +14,9 @@ public class Main {
 
 
     public static void main(String[] args) throws SQLException, FileNotFoundException {
-        MainScreen inlogpage = new MainScreen();
+       Registerpage2 inlogpage = new Registerpage2();
+
+
 
         try {
             new Server(12345).run();

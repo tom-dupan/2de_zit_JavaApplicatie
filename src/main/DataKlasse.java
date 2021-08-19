@@ -122,6 +122,5 @@ public  class DataKlasse {
         return CourseName;
     }
 
-    public static void setClassname(Class<? extends Inlogpage> aClass) {
-    }
+
 }

@@ -54,8 +54,8 @@ public class Registerpage2 extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 Inlogpage2 registerFrame = new Inlogpage2();
                 panel1.removeAll();
-                panel1.add(registerFrame);
                 panel1.repaint();
+                panel1.add(registerFrame);
             }
         });
     }

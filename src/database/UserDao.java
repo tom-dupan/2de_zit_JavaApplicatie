@@ -124,14 +124,12 @@ public class UserDao extends BaseDAO {
                     MainScreen choose = new MainScreen();
                     DataKlasse.getFrame().dispose();
                     DataKlasse.setFrame(choose);
-                     inlogpage = (Inlogpage2) new Inlogpage2().add(choose);
+
 
                 } else {
                     MainScreenAdmin chooseAdmin = new MainScreenAdmin();
                     DataKlasse.getFrame().dispose();
                     DataKlasse.setFrame(chooseAdmin);
-
-                     inlogpage = (Inlogpage2) new Inlogpage2().add(chooseAdmin);
                 }
             }
 

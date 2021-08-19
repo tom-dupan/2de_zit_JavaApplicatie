@@ -3,6 +3,7 @@ package main;
 
 import application.MainScreen;
 
+import application.authentication.Inlogpage2;
 import application.authentication.Registerpage2;
 import application.extraFeatures.Livechat2.Server;
 
@@ -15,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, FileNotFoundException {
        Registerpage2 inlogpage = new Registerpage2();
-
+        Inlogpage2 inlogpage2 = new Inlogpage2();
 
 
         try {

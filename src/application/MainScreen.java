@@ -1,5 +1,6 @@
 package application;
 
+import application.authentication.Inlogpage2;
 import application.extraFeatures.Livechat2.Calendar;
 import application.extraFeatures.Livechat2.ClientGui;
 import application.extraFeatures.Livechat2.RateSystem;
@@ -116,11 +117,7 @@ public class MainScreen<teller> extends JFrame {
         exit.addActionListener(new ActionListener() {
                                            @Override
                                            public void actionPerformed(ActionEvent e) {
-                                               try {
-                                                   Inlogpage inlogpage = new Inlogpage();
-                                               } catch (SQLException throwables) {
-                                                   throwables.printStackTrace();
-                                               }
+                                               Inlogpage2 inlogpage = new Inlogpage2();
                                                MainScreen.this.dispose();
                                            }
                                        });

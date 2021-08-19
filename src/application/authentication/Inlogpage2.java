@@ -4,13 +4,15 @@ import database.UserDao;
 import main.DataKlasse;
 import application.authentication.Registerpage2;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
 
-public class Inlogpage2 extends JFrame {
+public class Inlogpage2 extends JFrame{
+    private Container container1;
     private JPanel panel1;
     private JTextField nameInput;
     private JButton registerButton;
@@ -18,14 +20,26 @@ public class Inlogpage2 extends JFrame {
     private JPasswordField passwordInput;
     private JButton showpasswordButton;
 
+    public Inlogpage2() throws HeadlessException {
+        container1.add(nameInput);
+        container1.add(registerButton);
+        container1.add(loginButton);
+        container1.add(passwordInput);
+        container1.add(showpasswordButton);
+
+        this.add(container1);
+        this.setVisible(true);
+
+    }
+
     public void Inlogpage2() {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Registerpage2 registerFrame = new Registerpage2();
-                panel1.removeAll();
-                panel1.add(registerFrame);
-                panel1.repaint();
+                container1.removeAll();
+                container1.repaint();
+                container1.add(registerFrame);
             }
         });
         loginButton.addActionListener(new ActionListener() {

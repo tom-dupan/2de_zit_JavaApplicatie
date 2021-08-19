@@ -12,8 +12,8 @@ import java.sql.SQLException;
 
 
 public class Inlogpage2 extends JFrame{
-    private Container container1;
-    private JPanel panel1;
+    private Container container1 = new Container();
+    private JPanel panel1 = new JPanel();
     private JTextField nameInput;
     private JButton registerButton;
     private JButton loginButton;
@@ -21,13 +21,15 @@ public class Inlogpage2 extends JFrame{
     private JButton showpasswordButton;
 
     public Inlogpage2() throws HeadlessException {
+        this.add(panel1);
+        panel1.add(container1);
         container1.add(nameInput);
         container1.add(registerButton);
         container1.add(loginButton);
         container1.add(passwordInput);
         container1.add(showpasswordButton);
-
-        this.add(container1);
+        container1.setVisible(true);
+        panel1.setVisible(true);
         this.setVisible(true);
 
     }

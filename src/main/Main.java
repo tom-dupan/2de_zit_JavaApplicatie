@@ -15,8 +15,9 @@ public class Main {
 
 
     public static void main(String[] args) throws SQLException, FileNotFoundException {
-       Registerpage2 inlogpage = new Registerpage2();
-        Inlogpage2 inlogpage2 = new Inlogpage2();
+    Inlogpage2 login = new Inlogpage2();
+
+
 
 
         try {

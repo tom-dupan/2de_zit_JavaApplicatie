@@ -1,0 +1,13 @@
+Mijn Java applicatie is voor het aanvragen van Tutoring voor de erasmus hogeschool te brussel.
+Dus ten eerste regristreer of logt de gebruiker zich in in het systeem,
+daarna heeft de gebruiker de mogelijkheid om het vak/ de vakken naar keuze te selecteren en door te sturen.
+deze zullen dan naar een file gestuurd worden in een aparte package.
+Ook is er een livechat aanwazig die het mogelijk maakt voor de gebruikers om met elkaar publiek of prive berichten te sturen indien nodig.
+En natuurlijk vergeten we ook de kalender niet waarop de gebruikers afspraken kunnen maken/wijzigen.
+Indien de gebruiker over de admin rol beschikt, dan zal het adminscherm tevoorschijn komen.
+Het ratingsysteem is ook beschikbaar voor alle gebruikers, Je kan heel gemakkelijk ingeven welke rating je wilt geven, en ook de naam van gebruiker en een kleine beschrijving over hoe de medewerking ging.
+deze heeft niet de functie om een lijst met vakken te verkrijgen, maar een lijst van al de gebruikers met de rating en de meegegeven beschrijving die het evalueren makkelijker moet maken.
+de andere functies van bij een normale gebruiker zijn wel beschikbaar + een inbox functie waarop de admin alle files in die aparte package met de aanvragen kan terugvinden.
+Hierdoor is het heel simpel om daar alles te beheren en de orde binnen het systeem te kunnen bewaren.
+
+

@@ -31,7 +31,6 @@ public class MainScreenAdmin<teller> extends JFrame {
     private final Container container1 = getContentPane();
     private final JLabel digX = new JLabel("Dig-X");
     private final JLabel mct = new JLabel("MCT");
-    private final JButton submit = new JButton("Ask Tutor");
     private final JButton chat = new JButton("Open Livechat");
     private final JButton calendar = new JButton("My Calendar");
     private final JButton exit = new JButton("Go back");
@@ -39,8 +38,7 @@ public class MainScreenAdmin<teller> extends JFrame {
     private final JButton inbox = new JButton("Inbox");
     private final JButton allUsers = new JButton("Users");
 
-    private JList course2 = new JList();
-    private JList course = new JList();
+
     private JList userlist = new JList();
     ArrayList lijstje = new ArrayList();
 
@@ -57,57 +55,7 @@ public class MainScreenAdmin<teller> extends JFrame {
         DataKlasse.getFrame().setContentPane(container1);
         DataKlasse.getFrame().setVisible(true);
 
-        submit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-                if (course.getSelectedValue() != null && course2.getSelectedValue() == null) {
-                    try {
-                        DataKlasse.setCourseName(course.getSelectedValue().toString());
-                        lijstje.add(DataKlasse.getLijst().add(DataKlasse.getCourseName()));
-                        DataKlasse.setLijst(lijstje);
-                        CourseDAO.getId();
-
-                        DataKlasse.setTeller(DataKlasse.getTeller() + 1);
-                        File alleVakken = new File("src/application/Files/AlleGevraagdeVakken.txt" + DataKlasse.getTeller());
-                        FileOutputStream fileOutputStream = new FileOutputStream(alleVakken);
-                        ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
-                        String Resultaat = DataKlasse.getUserName() + '\n' + DataKlasse.getLijst();
-                        oos.writeObject(Resultaat);
-                        oos.close();
-                    } catch (FileNotFoundException fileNotFoundException) {
-                        fileNotFoundException.printStackTrace();
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                } else if (course.getSelectedValue() == null && course2.getSelectedValue() != null) {
-                    try {
-                        DataKlasse.setCourseName(course.getSelectedValue().toString());
-                        lijstje.add(DataKlasse.getLijst().add(DataKlasse.getCourseName()));
-                        DataKlasse.setLijst(lijstje);
-                        CourseDAO.getId();
-
-                        DataKlasse.setTeller(DataKlasse.getTeller() + 1);
-                        File alleVakken = new File("src/application/Files/AlleGevraagdeVakken.txt" + DataKlasse.getTeller());
-                        FileOutputStream fileOutputStream = new FileOutputStream(alleVakken);
-                        ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
-                        String Resultaat = DataKlasse.getUserName() + '\n' + DataKlasse.getLijst();
-                        oos.writeObject(Resultaat);
-                        oos.close();
-                    } catch (FileNotFoundException fileNotFoundException) {
-                        fileNotFoundException.printStackTrace();
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-
-
-                } else {
-                    JOptionPane.showMessageDialog(frame, "Please choose a course first.");
-
-
-                }
-            }
-        });
      allUsers.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
@@ -150,18 +98,6 @@ public class MainScreenAdmin<teller> extends JFrame {
                 application.MainScreenAdmin.this.dispose();
             }
         });
-        course.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                course2.clearSelection();
-            }
-        });
-        course2.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                course.clearSelection();
-            }
-        });
         chat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -192,14 +128,6 @@ public class MainScreenAdmin<teller> extends JFrame {
 
     }
 
-    public JList getCourse() {
-        return course;
-    }
-
-    public JButton getSubmit() {
-        return submit;
-    }
-
     public void setLayoutM() {
         container1.setLayout(null);
     }
@@ -211,22 +139,20 @@ public class MainScreenAdmin<teller> extends JFrame {
         mct.setBounds(500, 50, 90, 50);
         chat.setBounds(675, 150, 90, 30);
         calendar.setBounds(675, 200, 90, 30);
-        submit.setBounds(675, 100, 90, 30);
+
         rating.setBounds(675, 300, 90, 30);
         inbox.setBounds(675, 400, 90, 30);
 
-        course.setBounds(25, 100, 300, 500);
-        course2.setBounds(350, 100, 300, 500);
+        allUsers.setBounds(25, 100, 300, 500);
+
     }
 
 
     public void addToframe() {
         container1.add(digX);
         container1.add(mct);
-        container1.add(submit);
         container1.add(exit);
-        container1.add(course);
-        container1.add(course2);
+        container1.add(allUsers);
         container1.add(chat);
         container1.add(calendar);
         container1.add(rating);
